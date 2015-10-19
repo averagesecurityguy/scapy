@@ -12,15 +12,17 @@ new_port = 8888
 timeout = 5
 filter = 'tcp'
 
+
 def rewrite(pkt):
     if pkt[IP].dst == old_server and pkt[TCP].dport == old_port:
-	# Modify the packet
+        # Modify the packet
         print('ORIG: {0}'.format(pkt.summary()))
         pkt[IP].src = new_server
         pkt[TCP].dport = new_port
         print('NEW: {0}'.format(pkt.summary()))
         print()
+
+        # Send the modified packet
         sendp(pkt)
 
-
-sniff(filter=filter,prn=rewrite)
+sniff(filter=filter, prn=rewrite)

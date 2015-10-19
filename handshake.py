@@ -7,7 +7,8 @@ from scapy.all import *
 
 server = 'google.com'
 port = 80
-timeout= 5
+timeout = 5
+
 
 def handshake(dst, port):
     ip = Ether()/IP(dst=dst)

@@ -7,11 +7,12 @@ from scapy.all import *
 
 filter = "udp port 53"
 
+
 def process_dns(packet):
     dns = packet[DNS]
     if dns.qr == 0:
         query = dns[DNSQR]
-	qtype = dnsqtypes.get(query.qtype)
+        qtype = dnsqtypes.get(query.qtype)
         print('Request: {0} ({1})'.format(query.qname, qtype))
 
     if dns.qr == 1:
